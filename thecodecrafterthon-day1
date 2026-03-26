@@ -1,0 +1,71 @@
+package main 
+
+import (
+	"fmt"
+)
+
+func add(a, b int) int{
+
+	return a + b
+}
+func sub(a, b int) int{
+
+	return a - b
+}
+
+func mul(a, b int) int{
+
+	return a * b
+}
+
+func div(a, b int) int{
+
+	return a / b
+}
+
+func main() {
+
+	// var number1 int 
+	// var number2 int 
+
+	var a int 
+	var b int
+
+	var Op string
+	for {
+	fmt.Print("Select Opperations: \n add \n sub \n mul \n div \n Quit --> To Exit \n Select operation to continue... ")
+
+		_, err := fmt.Scanln(&Op)
+
+		if err != nil {
+			fmt.Println("invalid input")
+			return
+		}
+
+	fmt.Print("Enter first number: ")
+	fmt.Scanln(&a)
+	fmt.Print("Enter second number: ")
+	fmt.Scanln(&b)
+
+	switch Op {
+	case "add", "Add" :
+		fmt.Println("result: ", add(a,b))
+	case "sub", "Sub" : 
+		fmt.Println("result: ", sub(a,b))
+	case "mul", "Mul" : 
+		fmt.Println("result: ", mul(a,b))
+	case "div", "Div" :
+		if a % b != 0 {
+			fmt.Println("Input number: ", a, " is not Divisible by, ", b)
+			continue
+		}else{
+			fmt.Println("return: ", div(a,b))
+		}
+	case "quit", "Quit" : 
+		fmt.Println("Goodbye Happy To Have You!!!")
+		return
+	}
+	
+
+}
+}
