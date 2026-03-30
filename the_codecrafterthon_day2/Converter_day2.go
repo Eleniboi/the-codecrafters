@@ -6,139 +6,94 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	// "strconv"
-	// "strings"
 )
-func isBinary(s string)bool{
-	for _, ch := range s{
-		if ch != '0' && ch != '1'{
-			return false
-		}
-	}
-	return true
+
+func Help(){
+
+	fmt.Println("\033[42;3m -FOR SMOOTH EXPERIENCE USE THE FOLLOWING GUIDE LINE\033[0m")
+	fmt.Println("convert 1E hex")
+	fmt.Println("convert  1010 bin ")
+	fmt.Println("convert  255 dec")
+	fmt.Println("quit --> Exit")
+	fmt.Println("Help --> For This Same Menu")
 }
-
-func isHex(s string) bool{
-
-	for _, ch := range s{
-		if ch >= '0' || ch <= '9' && ch >= 'a' || ch <= 'f'{
-			return true
-		}
-	}
-	return false
-}
-
-func isDec(s string)bool{
-	if s == ""{
-		return false
-	}
-	for i, ch := range s{
-		if i == 0 && ch == '-'{
-			continue
-		}
-		if ch >= '0' && ch <= '9'{
-			return true
-		}
-	}
-	return false
-}
-
-func Help() {
-	fmt.Println("Guide line For Smooth Conversion")
-	fmt.Println("Use the following as a Guide...")
-	fmt.Println("convert 1E hex to convert --> Decimal")
-	fmt.Println("convert 10 bin to convert --> Decimal")
-	fmt.Println("convert 255 dec to convert--> Binary and Hex")
-	fmt.Println("help ---> for this menu")
-	fmt.Println("quit ---> To Exit")
-}
-
 func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Println("THE CLI BASE CONVERTER🪄")
-	fmt.Println("Enter Help For Guide Or Quit To Exit")
-
+	fmt.Println("\033[42;1m -WELCOME TO THE CONVERTER\033[0m")
+	fmt.Println("Enter help for Guide line, Or Quit to exit the program")
 	for {
-		fmt.Print("\n>")
 
-		if !scanner.Scan() {
-			break
-		}
+		fmt.Print("\n> ")
 
-		input := strings.TrimSpace(scanner.Text())
+		scanner.Scan()
 
-		input = strings.ToLower(input)
-		
-		if len(input) == 0{
-			fmt.Println("Empty Input. Enter help for Guide")
-			continue
-		}
-		if input == "quit"{
+		input := scanner.Text()
+
+		input = strings.TrimSpace(strings.ToLower(input))
+
+		if input == "quit" {
 			fmt.Println("GOODBYE!!")
 			break
 		}
-		if input =="help" {
+		if input == "help"{
 			Help()
 			continue
 		}
-
-		part :=strings.Fields(input)
-		
-		if len(part) == 0{
-			fmt.Println("Invalid Input")
+		if len(input) == 0{
+			fmt.Println("Empty input, Enter help for Guide line")
 			continue
 		}
+
+		part := strings.Fields(input) 
+		
+		if len(part) > 3 {
+			fmt.Println("To Many command, Enter Help for Guide line")
+			continue
+		}
+		if len(part) != 3 {
+			fmt.Println("Not Enough Input, Enter Help for Guide line")
+			continue
+		}
+		
 
 		command :=part[0]
 
-		if command != "convert"{
-			fmt.Println("Invalid command. use 'convert' or 'help'")
+		if command != "convert" {
+			fmt.Println("Invalid Input, Accepted input E.g 'convert' or Enter help For Guide")
 			continue
 		}
-		if len(part) != 3{
-			fmt.Println("Not enough input, usage: convert value base ")
-			continue
-		}
-		value := part[1]
+		Str :=part[1]
 		base := part[2]
-
-		if base != "hex" && base != "bin" && base != "dec"{
-			fmt.Println("Invalid base. Accepted base, 'bin','hex','dec'")
-			continue
-		}
 
 		switch base {
 		case "hex" :
-			if !isHex(value){
-				fmt.Println("Invalid Hex input")
+			n, err := strconv.ParseInt(Str, 16, 64)
+			if err != nil{
+				fmt.Println("Invalid hex number")
 				continue
 			}
-		case "bin" :
-			if !isBinary(value){
-				fmt.Println("Invalid Bin Input")
-				continue
-			}
-		case "dec" :
-			if !isDec(value){
-				fmt.Println("Invalid Dec number")
-				continue
-			}
-		}
-
-		var num int64 
-		var err error 
-
-		switch base {
-		case "bin" :
-			num, err = strconv.ParseInt(value, 2, 64)
+			fmt.Println("Decimal: ", n)
+		case "bin" : 
+			n, err := strconv.ParseInt(Str, 2 , 64)
 			if err != nil {
-				fmt.Println("Invalid Conversion")
+				fmt.Println("Invalid binary number")
 				continue
 			}
-			fmt.Println("Result: ", num)
-		}
+			fmt.Println("Decimal: ", n)
+		case "dec" :
+			n, err := strconv.ParseInt(Str, 10, 64)
+			if err != nil {
+				fmt.Println("Invalid Decimal number")
+				continue
+			}
 
+			fmt.Printf("Binary: %b\n", n)
+			fmt.Printf("Hex: %X", n)
+		default :
+			fmt.Println("Invalid base input, enter help for guide line")
+			continue
+		}
 	}
 }
