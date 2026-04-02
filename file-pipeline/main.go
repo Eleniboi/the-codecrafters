@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -58,14 +57,4 @@ func LowerToUpper(s string) string {
 		}
 	}
 	return strings.Join(result, " ")
-}
-func main() {
-
-	fmt.Println(trimSpace("    brother      main   who                are you                "))
-	fmt.Println(ToDo("TODO struct we TODO are great"))
-	fmt.Println(ClassToRed(" CLASSIFIED: struct we TODO are great CLASSIFIED:"))
-	fmt.Println(LowerToUpper("ppend a timestamp to the end of every"))
-	fmt.Println(CapToTitle("TODAY IS MY DAY OF JOY"))
-	//fmt.Println(("TODAY IS MY DAY OF JOY I WILL REJOICE IN THE LORD TODAY IS MY DAY OF JOY I WILL REJOICE IN THE LORD"))
-
 }
