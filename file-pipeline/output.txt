@@ -1,0 +1,10 @@
+The Perimeter Was Breached At 03:47 Local Time
+Extra Spaces Were Not Cleaned Before Logging
+Classified: Secondary Site Compromised
+Normal Report Line With No Issues
+Todo: Send Backup To Eastern Checkpoint
+Everything Was Fine Until It Wasn't
+Another Normal Line From The Field
+Classified: The Director Has Been Briefed
+Short Line
+This
