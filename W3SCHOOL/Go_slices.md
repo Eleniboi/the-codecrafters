@@ -96,3 +96,44 @@ func main() {
 
 }
 ```
+
+### Memory Efficiency
+
+When using slices, Go loads all the underlying elements into the memory.
+
+If the array is large and you need only a few elements, it is better to copy those elements using the copy() function.
+
+The copy() function creates a new underlying array with only the required elements for the slice. This will reduce the memory used for the program. 
+
+```go
+package main 
+
+
+import (
+    "fmt"
+)
+
+func main() {
+    
+    number :=[14]int{1,2,3,4,5,6,7,8,9,10,11,12,13,14}
+    
+    fmt.Println(number)
+    fmt.Println(len(number))
+    
+    slicenumber := number[1:7]
+    
+    fmt.Println(slicenumber)
+    fmt.Println(len(slicenumber))
+     fmt.Println(cap(slicenumber))
+    
+    copynumber := make([]int, len(slicenumber))
+    
+    copy(copynumber, slicenumber)
+    
+    fmt.Println(copynumber)
+    fmt.Println(len(copynumber))
+    fmt.Println(cap(copynumber))
+    
+}
+```
+
